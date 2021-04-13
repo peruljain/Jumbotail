@@ -1,0 +1,33 @@
+.dashboard{
+  position: absolute;
+  overflow: auto;
+  top: 50px;
+  right: 0px;
+  bottom: 0px;
+  transition: left 0.5s;
+}
+
+.map-child{
+    margin: 30px auto;
+    height: 80%;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px #ababab ;
+}
+
+.notifications-child{
+  margin: 30px auto;
+  width: 90%;
+ 
+}
+.type-child{
+  margin: 30px auto;
+  width: 90%;
+}
+
+
+@media screen and (max-width: 750px) {
+  .map-child{
+    height: 100%;
+  }
+}

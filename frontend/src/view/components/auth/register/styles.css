@@ -1,0 +1,40 @@
+
+.outer-box-layout{
+  height:100vh;
+  width: 100%;
+  background-image: url('../../../../assets/images/intro.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.inner-box-layout{
+  width: 40%;
+  color:white;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 3px 3px 5px 6px #000; 
+  border-radius: 8px;
+
+}
+
+.hr-light {
+  height: 2px;
+  background-color: white;
+}
+
+@media screen and (max-width: 1200px) {
+  .inner-box-layout{
+    width: 60%;
+  }
+  .headline {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .inner-box-layout{
+    width: 80%;
+  }
+  .headline {
+    font-size: 40px;
+  }
+}

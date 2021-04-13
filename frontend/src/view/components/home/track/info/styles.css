@@ -1,0 +1,17 @@
+.card-box{
+    min-width: 300px;
+    max-width: 600px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 2px #ebebeb ;
+}
+
+.img-pic{
+    max-height: 350px;
+}
+
+
+@media screen and (max-width: 750px) {
+    .overlay{
+        padding:15px;
+    }
+}

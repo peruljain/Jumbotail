@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/components/home/profile/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/components/home/profile/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import femaleIcon from "../../../../assets/illustrations/female.svg";
+import maleIcon from "../../../../assets/illustrations/male.svg";
+import {
+  getLoading,
+  getShowSidenav,
+
+  setError
+} from "../../../../controller/reducer/ui";
+import {
+  getProfile, getUser,
+  loadProfile,
+
+
+  updatePassword, updateProfile
+} from "../../../../controller/reducer/user";
+import { useSelectedTab } from "../../../hooks/useSelectedTab";
+import Loader from "../widget/loader";
+import ProfileForm from "./form";
+import PasswordForm from "./form-password";
+import "./style.css";
+
+//TODO
+/**
+ * Profile Component
+ * @description Shows profile of user and allow him/her to make changes
+ * @component
+ * @example
+ * return (
+ *   &lt;Profile dispatch={dispatch}/>
+ * )
+ */
+const Profile = () => {
+  const dispatch = useDispatch();
+  const [showProfileForm, setShowProfileForm] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const user = useSelector(getUser);
+  const profile = useSelector(getProfile);
+  const sidenav = useSelector(getShowSidenav);
+  const loading = useSelector(getLoading);
+
+  const closeProfile = () => setShowProfileForm(false);
+  const closePassword = () => setShowPasswordForm(false);
+
+  const notify = (msg) => dispatch(setError(msg));
+
+  useSelectedTab("4");
+
+
+
+  useEffect(() => {
+    dispatch(loadProfile());
+  }, [dispatch]);
+
+
+  const profileSubmit = (data)=>{
+    dispatch(updateProfile(data));
+  }
+
+  const passwordSubmit = (data)=>{
+    dispatch(updatePassword(data));
+  }
+  if (loading) return &lt;Loader />;
+
+  return (
+    &lt;div
+      className=" profile bg-light"
+      style={{ left: sidenav ? "var(--sidenav-width)" : "0px" }}
+    >
+      &lt;div className="row justify-content-center">
+        &lt;div className="col-12 col-lg-10 col-xl-8 mx-auto">
+          &lt;div className="my-4">
+            &lt;div className="row mt-5 align-items-center">
+              &lt;div className="col-md-3 text-center mb-5">
+                &lt;div className="avatar avatar-xl">
+                  &lt;img
+                    src={profile.isMale ? maleIcon : femaleIcon}
+                    alt="user avatar"
+                    className="avatar-img rounded-circle"
+                  />
+                &lt;/div>
+              &lt;/div>
+              &lt;div className="col">
+                &lt;div className="row align-items-center">
+                  &lt;div className="col-md-7">
+                    &lt;h4 className="mb-1">{user.name}&lt;/h4>
+                    &lt;p className=" mb-3">
+                      &lt;span className="p-1 badge badge-dark">{profile.role}&lt;/span>
+                    &lt;/p>
+                  &lt;/div>
+                &lt;/div>
+                &lt;div className="row mb-4">
+                  &lt;div className="col-md-7">
+                    &lt;p className="text-muted">{profile.about}&lt;/p>
+                  &lt;/div>
+                  &lt;div className="col">
+                    &lt;p className="small mb-0 text-muted">{profile.address}&lt;/p>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+            &lt;/div>
+            &lt;h1 className="h4  font-weight-normal">Profile Settings&lt;/h1>
+            &lt;hr className="my-4" />
+            {!showProfileForm &amp;&amp; (
+              &lt;Button
+                onClick={() => setShowProfileForm(true)}
+                className="p-20"
+                variant="outline-primary"
+                block
+              >
+                Update Profile
+              &lt;/Button>
+            )}
+            &lt;div>
+              {showProfileForm &amp;&amp; (
+                &lt;ProfileForm onSubmit={profileSubmit} onClose={closeProfile}/>
+              )}
+              &lt;br />
+              &lt;br />
+              &lt;h1 className="h4  font-weight-normal">Password Settings&lt;/h1>
+              &lt;hr className="my-4" />
+              {!showPasswordForm &amp;&amp; (
+                &lt;Button
+                  onClick={() => setShowPasswordForm(true)}
+                  className="m-20"
+                  variant="outline-primary"
+                  block
+                >
+                  Update Password
+                &lt;/Button>
+              )}
+              &lt;br />
+              {showPasswordForm &amp;&amp; (
+                &lt;PasswordForm onSubmit={passwordSubmit} notify={notify} onClose={closePassword}/>
+              )}
+            &lt;/div>
+            &lt;br />
+            &lt;br />
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Profile;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AssetList.html">AssetList</a></li><li><a href="AuthPage.html">AuthPage</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Info.html">Info</a></li><li><a href="Loader.html">Loader</a></li><li><a href="LogoutModal.html">LogoutModal</a></li><li><a href="Map.html">Map</a></li><li><a href="Profile.html">Profile</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="Track.html">Track</a></li><li><a href="TypeSelector.html">TypeSelector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addAssetNotificationFlow">addAssetNotificationFlow</a></li><li><a href="global.html#addNotificationFlow">addNotificationFlow</a></li><li><a href="global.html#firstName">firstName</a></li><li><a href="global.html#geoAssetNotificationsFlow">geoAssetNotificationsFlow</a></li><li><a href="global.html#geoFenceFlow">geoFenceFlow</a></li><li><a href="global.html#geoNotificationsFlow">geoNotificationsFlow</a></li><li><a href="global.html#geoRouteFlow">geoRouteFlow</a></li><li><a href="global.html#getProfileFlow">getProfileFlow</a></li><li><a href="global.html#hideSideNavFlow">hideSideNavFlow</a></li><li><a href="global.html#loadAssetsFlow">loadAssetsFlow</a></li><li><a href="global.html#loadLocalUserFlow">loadLocalUserFlow</a></li><li><a href="global.html#notify">notify</a></li><li><a href="global.html#pageLoadedFlow">pageLoadedFlow</a></li><li><a href="global.html#performLogoutFlow">performLogoutFlow</a></li><li><a href="global.html#performSignInFlow">performSignInFlow</a></li><li><a href="global.html#performSignUpFlow">performSignUpFlow</a></li><li><a href="global.html#putGeoFenceFlow">putGeoFenceFlow</a></li><li><a href="global.html#putGeoRouteFlow">putGeoRouteFlow</a></li><li><a href="global.html#setDateRangeFlow">setDateRangeFlow</a></li><li><a href="global.html#trackAssetFlow">trackAssetFlow</a></li><li><a href="global.html#updatePasswordFlow">updatePasswordFlow</a></li><li><a href="global.html#updateProfileFlow">updateProfileFlow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Apr 04 2021 18:14:33 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

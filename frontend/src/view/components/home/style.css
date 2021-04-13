@@ -1,0 +1,21 @@
+.home{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+div::-webkit-scrollbar {
+  padding: 10px;
+  height: 10px;      
+  width: 10px;               /* width of the entire scrollbar */
+}
+
+div::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: rgb(50, 50, 50);    /* color of the scroll thumb */
+}
+
